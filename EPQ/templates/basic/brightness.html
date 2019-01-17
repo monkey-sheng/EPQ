@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+        .form {
+            margin-right: 15%;
+            margin-left: 15%;
+            padding-bottom: 10%;
+        }
+    </style>
+<meta charset="utf-8">
+<title>Adjust brightness</title>
+</head>
+{% load static %}
+<body style="background-image: url({% static 'generic/bg_white.jpg' %})">
+	<p style="margin-left: 10px; font-size: 30px; font-family: 'Impact', 'Haettenschweiler', 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';background-color: #333; color: whitesmoke;text-align: center">Brightness<br>
+	</p>
+      <form class="form" name = "form" enctype = "multipart/form-data"
+         action = "proc/" method = "POST" >{% csrf_token %}
+
+         <br>
+
+         <div style = "max-width:470px;padding-top: 200px;padding-left: 100px;">
+           <div style="text-align: center;">
+               <input type = "file" style = "margin-left:20%;"
+                  placeholder = "Image" name = "img" />
+			   <br><p style="font-family: Calibri;font-size: 17px">Enter a number from 0.0 to 10.0 (decimal places allowed) as the desired level of brightness.<br>0 means pure darkness, though 10 is <strong>NOT</strong> pure white. 1.x~2.x is usually a good choice. </p>
+			 <input style="float: left; margin-left: 190px;" type = "text" name = "brightness" />
+		   </div>
+		  </div>
+         <elem> (Level of brightness)</elem>
+<br>
+
+         <div style = "max-width:470px;padding-left: 65px;">
+            <div style="text-align: center;">
+
+               <button style = "border:0; background-color:#333; margin-top:8%;
+                  height:35px; width:80%; margin-left:19%;" type = "submit" value = "Submit" >
+                  <strong style="color: white">submit</strong>
+               </button>
+
+            </div>
+         </div>
+
+</form>
+
+</body><body>
+</body>
+</html>

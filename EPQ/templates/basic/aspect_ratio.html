@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <style>
+        .form {
+            margin-right: 15%;
+            margin-left: 15%;
+            padding-bottom: 10%;
+        }
+    </style>
+<meta charset="utf-8">
+<title>Aspect Ratio</title>
+</head>
+{% load static %}
+<body style="background-image: url({% static 'generic/bg_white.jpg' %});">
+	<p style="margin-left: 10px; font-size: 30px; font-family: 'Impact', 'Haettenschweiler', 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';background-color: #333; color: whitesmoke;text-align: center">Aspect Ratio<br>
+	</p>
+      <form class="form" name = "form" enctype = "multipart/form-data"
+         action = "proc/" method = "POST" >{% csrf_token %}
+
+         <br>
+
+         <div style = "max-width:470px;padding-top: 200px;padding-left: 100px;">
+           <div style="text-align: center;">
+               <input type = "file" style = "margin-left:20%;"
+                  placeholder = "Image" name = "img" />
+               <br><p style="font-family: Calibri;font-size: 17px">Enter a custom value for your desired aspect ratio, <strong>OR</strong> choose one from below.<br><strong>The first box is for horizontal, and the second box for vertical.</strong><br></p>
+			 <input style="width: 40px;float: left; margin-left: 190px; margin-top: 2px" type = "text" name = "aspect_ratio_h" min="1" max="4096"/>
+		   </div>
+	    </div>
+        <elem style="float: left;padding-left: 6px; padding-right: 6px;"> : </elem>
+        <input style="width: 40px;" type = "text" name = "aspect_ratio_v" min="1" max="4096" />
+
+		  <br><br><br>
+
+		<div style="margin-left:20%; float: left">
+		 <input type="radio" name="aspect_ratio" value="16:9"/>16:9
+		</div>
+		<div style="margin-left:8%; float: left">
+		 <input type="radio" name="aspect_ratio" value="4:3"/>4:3
+		</div>
+		<div style="margin-left:8%; float: left">
+			<input type="radio" name="aspect_ratio" value="1.85:1"/>1.85:1 (movies)
+		</div>
+		<div style="margin-left:8%; float: left">
+			<input type="radio" name="aspect_ratio" value="9:19.5"/>9:19.5 (iPhone X, etc.)
+		</div>
+		<div style="margin-left:20%; ">
+			<input type="radio" name="aspect_ratio" value="9:18.5"/>9:18.5 (Galaxy S9, etc.)
+		</div>
+		<p style="margin-top: 30px; margin-left: 20%;border-top-style: double; border-top-color: black; border-top-width: 3px;"><strong>Choose one method for acheiving the aspect ratio</strong></p>
+		<div style="margin-top: 30px; margin-left: 20%;">
+			<input type="radio" name="type" value="crop" checked/>crop out the largest possible area with the given aspect ratio
+		</div>
+		<div style="margin-top: 10px; margin-left: 20%;">
+			<input type="radio" name="type" value="fit"/>Fit the image into the given aspect ratio (will cuase it to appear squeezed or stretched!)
+		</div>
+         <div style = "max-width:470px;padding-left: 65px;">
+            <div style="text-align: center;">
+
+               <button style = "border:0; background-color:#333; margin-top:8%;
+                  height:35px; width:80%; margin-left:19%;" type = "submit" value = "Submit" >
+                  <strong style="color: white">submit</strong>
+               </button>
+
+            </div>
+         </div>
+
+</form>
+
+</body><body>
+</body>
+</html>
