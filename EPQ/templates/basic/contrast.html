@@ -1,49 +1,96 @@
 <!doctype html>
 <html>
-<head>
+	{% load static %}
+    <head>
     <style>
-        .form {
-            margin-right: 15%;
-            margin-left: 15%;
-            padding-bottom: 10%;
-        }
-    </style>
-<meta charset="utf-8">
-<title>Contrast</title>
-</head>
-{% load static %}
-<body style="background-image: url({% static 'generic/bg_white.jpg' %})">
-	<p style="margin-left: 10px; font-size: 30px; font-family: 'Impact', 'Haettenschweiler', 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';background-color: #333; color: whitesmoke;text-align: center">Contrast<br>
-	</p>
-      <form class="form" name = "form" enctype = "multipart/form-data"
-         action = "proc/" method = "POST" >{% csrf_token %}
+.form {
+	margin-right: 15%;
+	margin-left: 15%;
+	padding-bottom: 10%;
+}
+.banner {
+	margin-left: 10px;
+	font-size: 30px;
+	font-family: 'Impact', 'Haettenschweiler', 'Franklin Gothic Bold', 'Arial Black', 'sans-serif';
+	background-color: #333;
+	color: whitesmoke;
+	text-align: center
+}
+* {box-sizing: border-box;}
 
-         <br>
+.img-comp-container {
+  position: relative;
+  height: 300px; /*should be the same height as the images*/
+  margin-left: 25%;
+  margin-top: 3%;
+}
 
-         <div style = "max-width:470px;padding-top: 200px;padding-left: 100px;">
-           <div style="text-align: center;">
-               <input type = "file" style = "margin-left:20%;"
+.img-comp-img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+
+.img-comp-img img {
+  display: block;
+  vertical-align: middle;
+}
+
+.img-comp-slider {
+  position: absolute;
+  z-index: 9;
+  cursor: ew-resize;
+  /*set the appearance of the slider:*/
+  width: 40px;
+  height: 40px;
+  background-color: #2196F3;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+.description{
+	padding-top: 10px; padding-left: 25%;
+	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+	font-size: 13px;
+		}
+</style>
+    <meta charset="utf-8">
+    <title>Contrast</title>
+    <script src="{% static 'generic/img_comparison.js' %}"></script>
+    </head>
+    
+    <body style="background-image: url({% static 'generic/bg_white.jpg' %})">
+<div class="banner" >Contrast</div>
+<div class="img-comp-container">
+      <div class="img-comp-img"> <img src="{% static 'basic/contrast/original.jpg' %}" height="300"> </div>
+      <div class="img-comp-img img-comp-overlay"> <img src="{% static 'basic/contrast/2xcontrast.png' %}" height="300"> </div>
+</div>
+<div class="description">
+	<div>drag to compare</div><div>left: 2.0x contrast &nbsp;&nbsp;&nbsp;&nbsp;right: original image</div>
+</div>
+<form class="form" name = "form" enctype = "multipart/form-data"
+         action = "proc/" method = "POST" >
+      {% csrf_token %} <br>
+      <div style = "max-width:470px;padding-top: 50px;padding-left: 100px;">
+    <div style="text-align: center;">
+          <input type = "file" style = "margin-left:20%;"
                   placeholder = "Image" name = "img" />
-			   <br><p style="font-family: Calibri;font-size: 17px">Enter a number from 1 to 99 (in percentage) as the desired output contrast</p>
-			 <input style="float: left; margin-left: 190px;" type = "number" min="1" max="99" name = "contrast" />
-		   </div>
-		  </div>
-         <elem>%</elem>
-<br>
-
-         <div style = "max-width:470px;padding-left: 65px;">
-            <div style="text-align: center;">
-
-               <button style = "border:0; background-color:#333; margin-top:8%;
-                  height:35px; width:80%; margin-left:19%;" type = "submit" value = "Submit" >
-                  <strong style="color: white">submit</strong>
-               </button>
-
-            </div>
-         </div>
-
-</form>
-
-</body><body>
+          <br>
+          <p style="font-family: Calibri;font-size: 17px">Enter a number from 0 to 10 as the desired output contrast, though the <strong>feasible </strong>contrast level might be capped under a certain value, due to the nature of the uploaded picture</p>
+          <input style="float: left; margin-left: 190px;" min="0" max="99" name = "contrast" />
+        </div>
+  </div>
+      <elem>x times</elem>
+      <br>
+      <div style = "max-width:470px;padding-left: 65px;">
+    <div style="text-align: center;">
+          <button style = "border:0; background-color:#333; margin-top:8%;
+                  height:35px; width:80%; margin-left:19%;" type = "submit" value = "Submit" > <strong style="color: white">submit</strong> </button>
+        </div>
+  </div>
+    </form>
+<script>
+	initComparisons()
+</script>
 </body>
 </html>
